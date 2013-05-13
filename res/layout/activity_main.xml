@@ -1,4 +1,4 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -6,33 +6,29 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".WelcomeActivity" >
+    android:orientation="vertical"
+    tools:context=".MainActivity" >
 
     <TextView
-        android:id="@+id/welcome_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="24sp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        />
+        android:textStyle="bold|italic"
+        android:text="@string/hello_world" />
     
-    <TextView 
-        android:id="@+id/greeted_label"
+    <EditText
+        android:id="@+id/name" 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Greeted"
-        android:textSize="36sp"
-        android:textStyle="bold"
-        android:layout_below="@id/welcome_text"
-        android:layout_alignParentLeft="true"
+        android:hint="Please enter your name"
         />
     
-    <ListView 
-        android:id="@+id/name_list"
-        android:layout_width="match_parent"
+    <Button 
+        android:id="@+id/submit_button"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/greeted_label"
+        android:text="Submit name"
+        android:onClick="sayHello"
         />
     
-</RelativeLayout>
+</LinearLayout>

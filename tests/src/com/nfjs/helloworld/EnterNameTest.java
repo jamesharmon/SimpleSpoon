@@ -9,49 +9,65 @@ import android.widget.EditText;
 
 import com.squareup.spoon.Spoon;
 
-public class EnterNameTest extends
-		ActivityInstrumentationTestCase2<MainActivity> {
+public class EnterNameTest extends ActivityInstrumentationTestCase2<MainActivity> {
 
-	private static final String TAG = EnterNameTest.class
-			.getSimpleName();
+   private static final String TAG = EnterNameTest.class.getSimpleName();
 
-	public EnterNameTest() {
-		super(MainActivity.class);
-	}
+   public EnterNameTest() {
+      super(MainActivity.class);
+   }
 
-	private Instrumentation instrumentation;
-	private Activity activity;
-	private Button manual;
+   private Instrumentation instrumentation;
+   private Activity activity;
+   private Button manual;
 
-	// private Solo solo;
+   // private Solo solo;
 
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
-		instrumentation = getInstrumentation();
-		activity = getActivity();
-		// solo = new Solo(getInstrumentation(), activity);
-	}
+   @Override
+   protected void setUp() throws Exception {
+      super.setUp();
+      instrumentation = getInstrumentation();
+      activity = getActivity();
+      // solo = new Solo(getInstrumentation(), activity);
+   }
 
-	public void testEditVehicle() {
+   public void xtestMainActivityNoSpoon() {
 
-		Spoon.screenshot(activity, "initial_state");
-		Log.v("Spoon Test", "Log message");
+      final EditText vin = (EditText) activity.findViewById(R.id.name);
+      final Button submitButton = (Button) activity.findViewById(R.id.submit_button);
 
-		final EditText vin = (EditText) activity
-				.findViewById(R.id.name);
-		final Button submitButton = (Button) activity
-				.findViewById(R.id.name_button);
+      // Click the "manual entry" button.
+      instrumentation.runOnMainSync(new Runnable() {
+         @Override
+         public void run() {
+            vin.setText("Joe");
+         }
+      });
+      
+      instrumentation.addMonitor(WelcomeActivity.class.getName(), null, true);
 
-		// Click the "manual entry" button.
-		instrumentation.runOnMainSync(new Runnable() {
-			@Override
-			public void run() {
-				vin.setText("Joe");
-			}
-		});
+   }
 
-		instrumentation.waitForIdleSync();
-		Spoon.screenshot(activity, "name_entered");
-	}
+   public void xtestEnterName() {
+
+      Spoon.screenshot(activity, "initial_state");
+      Log.v("Spoon Test", "Log message");
+
+      final EditText vin = (EditText) activity.findViewById(R.id.name);
+      final Button submitButton = (Button) activity.findViewById(R.id.submit_button);
+
+      // Click the "manual entry" button.
+      instrumentation.runOnMainSync(new Runnable() {
+         @Override
+         public void run() {
+            vin.setText("Joe");
+         }
+      });
+
+      instrumentation.waitForIdleSync();
+      Spoon.screenshot(activity, "name_entered");
+      
+      instrumentation.addMonitor(WelcomeActivity.class.getName(), null, true);
+      
+   }
 }
